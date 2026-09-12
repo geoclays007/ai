@@ -152,8 +152,17 @@
 
 <section>
   <h2><span class="badge">2</span>얕은기초 지지력 계산기</h2>
-  <p class="where cli">⚠ 여기서부터는 <b>프로그램이 바뀝니다.</b> 앱을 닫지 마시고,
-     <b>PowerShell을 열어 <code>claude</code></b> 라고 치세요. 검은 화면에서 합니다.</p>
+  <p class="where cli">⚠ 여기서부터는 <b>프로그램이 바뀝니다.</b> 앱은 닫지 마시고,
+     <b>PowerShell</b>을 새로 열어 아래 한 줄을 붙여넣으세요. 검은 화면에서 합니다.</p>
+  <div class="box" id="p0">New-Item -ItemType Directory -Force C:\ai | Out-Null; cd C:\ai; claude</div>
+  <button class="copy small" data-copy-from="p0">복사</button>
+  <div class="note">
+    작업할 폴더 <code>C:\ai</code> 를 만들고, <b>그 안에서</b> Claude Code를 켭니다.
+    폴더가 이미 있으면 그냥 넘어갑니다.<br>
+    처음 켜면 <b>이 폴더를 믿느냐</b>고 묻습니다. 기본값이 「No, exit」이니
+    <b>방향키 ↓ 로 「Yes, I trust this folder」를 고른 뒤</b> Enter를 누르세요.
+  </div>
+
   <div class="sub-h">첫째 — 계산기를 만들고 돌려봅시다</div>
   <p class="lead">이번에는 <b>복사해서 붙여넣기</b>입니다. AI가 파이썬 코드를 짜고, 직접 돌려보고, 틀리면 스스로 고칩니다.</p>
   <div class="box" id="p2">C:\ai 폴더에 얕은기초 지지력 계산기를 파이썬으로 만들고 바로 실행해줘.
@@ -179,13 +188,15 @@
 
 - C:\ai 폴더에 report.html 파일로 저장한다
 - 입력 조건, 계산 과정, 결과표, 결론이 들어간다
+- 입력값은 화면에서 직접 바꿀 수 있게 하고, 바꾸면 결과가 실시간으로 바뀌게 한다
 - 표와 색을 써서 보기 좋게 만든다
 
 만든 다음 브라우저로 바로 열어줘.
 그리고 C:\ai 폴더에 지금 어떤 파일들이 있는지도 보여줘.</div>
   <button class="copy" data-copy-from="p3">프롬프트 복사하기</button>
   <div class="note">
-    브라우저가 저절로 열리고 보고서가 뜹니다. <b>그 파일은 진짜로 내 컴퓨터에 있습니다.</b><br>
+    브라우저가 저절로 열리고 보고서가 뜹니다. <b>입력칸의 숫자를 바꿔 보세요. 결과가 바로 따라 바뀝니다.</b><br>
+    그 파일은 <b>진짜로 내 컴퓨터에 있습니다.</b>
     <b>탐색기로 <code>C:\ai</code> 폴더를 직접 열어보세요.</b> 파이썬 파일과 보고서가 나란히 들어 있습니다.
   </div>
 
