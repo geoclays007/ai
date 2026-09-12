@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>동문회 AI 실습</title>
+<style>
+  :root{
+    --bg:#f4f6f9; --card:#fff; --ink:#16202e; --sub:#5b6676;
+    --navy:#1b3a6b; --blue:#2f6bd0; --line:#d9e0e9;
+    --warnbg:#fff4e5; --warnink:#c00000;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:"Malgun Gothic","맑은 고딕",-apple-system,sans-serif;
+       font-size:17px;line-height:1.6}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+  header{padding:22px 0 14px;border-bottom:3px solid var(--navy);margin-bottom:22px}
+  h1{margin:0 0 6px;font-size:27px;letter-spacing:-0.5px}
+  header p{margin:0;color:var(--sub);font-size:15px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;
+          padding:18px;margin:0 0 18px}
+  h2{margin:0 0 4px;font-size:20px;color:var(--navy);display:flex;align-items:center;gap:9px}
+  .badge{display:inline-flex;align-items:center;justify-content:center;
+         min-width:30px;height:30px;border-radius:50%;background:var(--navy);
+         color:#fff;font-size:15px;font-weight:700}
+  .lead{margin:0 0 14px;color:var(--sub);font-size:15px}
+  .box{background:#eaf1fb;border:1px solid #b9cdea;border-left:5px solid var(--blue);
+       border-radius:7px;padding:14px;margin:0 0 10px;
+       font-family:Consolas,"D2Coding",monospace;font-size:15px;line-height:1.65;
+       white-space:pre-wrap;word-break:break-word;color:#12356e}
+  .type{background:#fffbe8;border-color:#e6d28a;border-left-color:#d9a400;
+        color:#5c4500;font-size:20px;font-weight:700;text-align:center;padding:18px 14px;
+        font-family:"Malgun Gothic","맑은 고딕",sans-serif}
+  button{appearance:none;border:0;cursor:pointer;font:inherit}
+  .copy{background:var(--blue);color:#fff;padding:12px 20px;border-radius:7px;
+        font-size:16px;font-weight:700;width:100%}
+  .copy:active{transform:translateY(1px)}
+  .copy.small{background:#eef1f5;color:#41506a;font-size:14px;font-weight:600;
+              padding:9px 14px;width:auto}
+  .copy.done{background:#1e8a4c}
+  .warn{background:var(--warnbg);border-left:5px solid var(--warnink);
+        color:var(--warnink);font-weight:700;padding:12px 14px;border-radius:6px;
+        margin:0 0 12px;font-size:16px}
+  .note{background:#f5f7fa;border:1px dashed #c3ccd8;border-radius:7px;
+        padding:12px 14px;margin:12px 0 0;font-size:15px;color:#40495a}
+  .note b{color:var(--navy)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .sub-h{font-size:16px;font-weight:700;margin:16px 0 6px;color:var(--navy)}
+  footer{text-align:center;color:var(--sub);font-size:14px;margin-top:26px}
+  @media (max-width:480px){ body{font-size:16px} h1{font-size:23px} .type{font-size:17px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>동문회 AI 실습</h1>
+  <p>오늘 쓸 프롬프트가 여기 다 있습니다. 파란 버튼을 누르면 복사됩니다.</p>
+</header>
+
+<section>
+  <h2><span class="badge">1</span>경품 추첨 룰렛</h2>
+  <p class="lead">이것만은 <b>직접 손으로 쳐보세요.</b> 한국말로 시키는 것이라는 걸 몸으로 아셔야 합니다.</p>
+  <div class="box type">이름을 넣고 돌리는 경품 추첨 룰렛을 html로 만들어줘</div>
+  <div class="row">
+    <button class="copy small" data-copy="이름을 넣고 돌리는 경품 추첨 룰렛을 html로 만들어줘">정 안 되면 여기서 복사</button>
+  </div>
+  <div class="note">
+    <b>오타가 나도 괜찮습니다.</b> AI가 알아서 알아듣습니다. 띄어쓰기도 신경 쓰지 마세요.<br>
+    다 만들어지면 <b>옆자리와 화면을 비교해 보세요.</b> 같은 문장인데 다르게 나옵니다. 그게 정상입니다.
+  </div>
+</section>
+
+<section>
+  <h2><span class="badge">2</span>얕은기초 지지력 계산기</h2>
+  <p class="lead">이번에는 <b>복사해서 붙여넣기</b>입니다. AI가 파이썬 코드를 짜고, 직접 돌려보고, 틀리면 스스로 고칩니다.</p>
+  <div class="box" id="p2">C:\ai 폴더에 얕은기초 지지력 계산기를 파이썬으로 만들고 바로 실행해줘.
+
+- Terzaghi 공식으로 극한지지력과 허용지지력을 구한다
+- 전반전단파괴와 관입전단파괴를 모두 계산한다
+- 입력값: 점착력 c=20 kPa, 내부마찰각 30도, 기초폭 B=2 m, 길이 L=3 m,
+  근입깊이 Df=1.5 m, 흙의 단위중량 18 kN/m3, 안전율 3, 직사각형 기초
+- 계산에 쓴 지지력계수(Nc, Nq, N감마)와 형상계수도 같이 출력한다
+- 결과는 보기 좋게 표로 출력한다
+
+파일을 만든 뒤 직접 실행해서 결과를 보여주고, 오류가 나면 스스로 고쳐서 다시 실행해줘.</div>
+  <button class="copy" data-copy-from="p2">프롬프트 복사하기</button>
+  <div class="note">
+    결과가 나오면 <b>「관입전단파괴」의 허용지지력 숫자 하나만 적어두세요.</b>
+    잠시 뒤에 다 같이 비교해 봅니다. <b>옆자리와 숫자가 다를 수 있습니다.</b>
+  </div>
+</section>
+
+<section>
+  <h2><span class="badge">+</span>시간이 남으면</h2>
+  <p class="lead">먼저 끝나신 분은 이어서 시켜 보세요. 그냥 한국말로 더 주문하시면 됩니다.</p>
+
+  <div class="sub-h">기초 폭을 바꿔가며 보기</div>
+  <div class="box" id="x1">기초폭 B를 1m부터 5m까지 0.5m 간격으로 바꿔가며 허용지지력이 어떻게 변하는지 표로 보여줘</div>
+  <button class="copy small" data-copy-from="x1">복사</button>
+
+  <div class="sub-h">지하수위를 넣어 보기</div>
+  <div class="box" id="x2">지하수위가 지표면에 있는 경우로 다시 계산해서 아까 결과와 나란히 비교해줘</div>
+  <button class="copy small" data-copy-from="x2">복사</button>
+
+  <div class="sub-h">룰렛을 더 예쁘게</div>
+  <div class="box" id="x3">룰렛 색을 더 화려하게 바꾸고 당첨되면 축하 효과를 넣어줘</div>
+  <button class="copy small" data-copy-from="x3">복사</button>
+</section>
+
+<section>
+  <h2><span class="badge">!</span>안 될 때</h2>
+  <div class="warn">빨간 글씨가 나와도 컴퓨터는 아무렇지도 않습니다. 그냥 안 된 것뿐입니다. 손 들어 주세요.</div>
+
+  <div class="sub-h">claude 라고 쳤는데 「인식되지 않습니다」</div>
+  <div class="box" id="f1">$b="$env:USERPROFILE\.local\bin"; $p=[Environment]::GetEnvironmentVariable("Path","User"); if(($p -split ';') -notcontains $b){[Environment]::SetEnvironmentVariable("Path",$p.TrimEnd(';')+";$b","User")}; $env:Path="$env:Path;$b"</div>
+  <button class="copy small" data-copy-from="f1">복사</button>
+
+  <div class="sub-h">그래도 안 되면 — 이건 무조건 됩니다</div>
+  <div class="box" id="f2">&amp; "$env:USERPROFILE\.local\bin\claude.exe"</div>
+  <button class="copy small" data-copy-from="f2">복사</button>
+
+  <div class="sub-h">python 이라고 쳤는데 스토어 창이 뜬다</div>
+  <div class="note">
+    윈도우 <b>설정 → 앱 → 고급 앱 설정 → 앱 실행 별칭</b> 에서
+    <b>python.exe</b> 와 <b>python3.exe</b> 를 <b>끔</b>으로 바꾸고 PowerShell을 새로 여세요.
+  </div>
+</section>
+
+<footer>동문회 AI 실습 · 전상현</footer>
+
+</div>
+
+<script>
+(function(){
+  function flash(btn, ok){
+    var t = btn.textContent;
+    btn.textContent = ok ? '복사했습니다' : '복사 실패 — 길게 눌러 복사하세요';
+    if (ok) btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = t; btn.classList.remove('done'); }, 1600);
+  }
+  function put(text, btn){
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ flash(btn, true); },
+                                               function(){ legacy(text, btn); });
+    } else { legacy(text, btn); }
+  }
+  function legacy(text, btn){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+    document.body.removeChild(ta);
+    flash(btn, ok);
+  }
+  document.querySelectorAll('button[data-copy],button[data-copy-from]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var src = b.getAttribute('data-copy-from');
+      var text = src ? document.getElementById(src).textContent : b.getAttribute('data-copy');
+      put(text, b);
+    });
+  });
+})();
+</script>
+</body>
+</html>
