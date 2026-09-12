@@ -47,6 +47,16 @@
   .note b{color:var(--navy)}
   .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
   .sub-h{font-size:16px;font-weight:700;margin:16px 0 6px;color:var(--navy)}
+  .names{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .chip{background:#eaf1fb;border:1px solid #b9cdea;color:#12356e;
+        border-radius:999px;padding:7px 14px;font-size:16px;font-weight:700}
+  .chip.mine{background:#fffbe8;border-color:#e6d28a;color:#5c4500}
+  .chip button{background:none;color:#8a94a5;margin-left:6px;font-size:15px;padding:0}
+  .addrow{display:flex;gap:8px;margin:0 0 12px}
+  .addrow input{flex:1;min-width:0;padding:11px 13px;font:inherit;font-size:16px;
+                border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
+  .addrow input:focus{outline:2px solid var(--blue);outline-offset:-1px}
+  .addbtn{white-space:nowrap}
   footer{text-align:center;color:var(--sub);font-size:14px;margin-top:26px}
   @media (max-width:480px){ body{font-size:16px} h1{font-size:23px} .type{font-size:17px} }
 </style>
@@ -61,7 +71,9 @@
 
 <section>
   <h2><span class="badge">1</span>경품 추첨 룰렛</h2>
-  <p class="lead">이것만은 <b>직접 손으로 쳐보세요.</b> 한국말로 시키는 것이라는 걸 몸으로 아셔야 합니다.</p>
+
+  <div class="sub-h">첫째 — 이것만은 직접 손으로 쳐보세요</div>
+  <p class="lead">한국말로 시키는 것이라는 걸 한 번은 몸으로 아셔야 합니다.</p>
   <div class="box type">이름을 넣고 돌리는 경품 추첨 룰렛을 html로 만들어줘</div>
   <div class="row">
     <button class="copy small" data-copy="이름을 넣고 돌리는 경품 추첨 룰렛을 html로 만들어줘">정 안 되면 여기서 복사</button>
@@ -69,6 +81,24 @@
   <div class="note">
     <b>오타가 나도 괜찮습니다.</b> AI가 알아서 알아듣습니다. 띄어쓰기도 신경 쓰지 마세요.<br>
     다 만들어지면 <b>옆자리와 화면을 비교해 보세요.</b> 같은 문장인데 다르게 나옵니다. 그게 정상입니다.
+  </div>
+
+  <div class="sub-h">둘째 — 오늘 오신 분들 이름을 넣어봅시다</div>
+  <p class="lead">룰렛이 만들어졌으면, <b>끝내지 말고 이어서</b> 아래를 붙여넣으세요.
+     고치라고 다시 말하면 고쳐줍니다. 그게 이 도구의 핵심입니다.</p>
+
+  <div class="names" id="chips"></div>
+
+  <div class="addrow">
+    <input id="newname" type="text" placeholder="내 이름이 없으면 여기에" maxlength="20" autocomplete="off">
+    <button class="copy small addbtn" id="addbtn">추가</button>
+  </div>
+
+  <button class="copy" id="copynames">이름 명단 복사하기</button>
+
+  <div class="note">
+    붙여넣으면 <b>「이름은 아래를 넣어주세요」</b> 와 명단이 같이 들어갑니다.<br>
+    추가하신 이름은 <b>이 브라우저에만</b> 남습니다. 옆자리 화면은 바뀌지 않습니다.
   </div>
 </section>
 
@@ -163,6 +193,56 @@
       put(text, b);
     });
   });
+
+  // ── 참석자 명단 ──────────────────────────────────────────────
+  var BASE = ['박병수','엄재경','정길수','이희광','최규대','최장식','김현주','이병곤'];
+  var KEY  = 'aiclass.names';
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch(e){ return []; }
+  }
+  function save(list){
+    try { localStorage.setItem(KEY, JSON.stringify(list)); } catch(e){}
+  }
+  var extra = load().filter(function(n){ return BASE.indexOf(n) === -1; });
+
+  var chips = document.getElementById('chips');
+  function all(){ return BASE.concat(extra); }
+  function render(){
+    chips.innerHTML = '';
+    all().forEach(function(n, i){
+      var mine = i >= BASE.length;
+      var el = document.createElement('span');
+      el.className = 'chip' + (mine ? ' mine' : '');
+      el.appendChild(document.createTextNode(n));
+      if (mine) {
+        var x = document.createElement('button');
+        x.type = 'button'; x.textContent = '×'; x.title = '빼기';
+        x.addEventListener('click', function(){
+          extra.splice(i - BASE.length, 1); save(extra); render();
+        });
+        el.appendChild(x);
+      }
+      chips.appendChild(el);
+    });
+  }
+  var input = document.getElementById('newname');
+  function add(){
+    var v = (input.value || '').trim();
+    if (!v) return;
+    if (all().indexOf(v) === -1) { extra.push(v); save(extra); render(); }
+    input.value = '';
+    input.focus();
+  }
+  document.getElementById('addbtn').addEventListener('click', add);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') add(); });
+
+  document.getElementById('copynames').addEventListener('click', function(){
+    put('이름은 아래를 넣어주세요\n' + all().join(', '), this);
+  });
+
+  render();
 })();
 </script>
 </body>
