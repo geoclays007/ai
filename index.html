@@ -81,6 +81,25 @@
   <p>오늘 쓸 프롬프트가 여기 다 있습니다. 파란 버튼을 누르면 복사됩니다.</p>
 </header>
 
+<div class="row" style="gap:10px;margin:0 0 10px">
+  <a class="btnlink" style="flex:1;margin:0" href="#track-civil">토목 트랙
+    <span style="display:block;font-size:14px;font-weight:400;opacity:.85">지지력 계산기</span></a>
+  <a class="btnlink" style="flex:1;margin:0;background:#1f7a52" href="#track-admin">행정 트랙
+    <span style="display:block;font-size:14px;font-weight:400;opacity:.85">출장 여비 정산</span></a>
+</div>
+<p class="lead" style="margin:0 0 18px">실습①(룰렛)은 두 분 다 같습니다. <b>뒤의 20분(실습②)만 갈립니다.</b>
+   학교 행정 업무를 하시는 분은 <b>행정 트랙</b>으로 가세요.</p>
+
+<section class="dl" style="border-color:#b23a6a;background:linear-gradient(180deg,#fff4f8,#fff)">
+  <h2 style="color:#b23a6a"><span class="badge" style="background:#b23a6a">?</span>설치가 아직이신 분</h2>
+  <p class="lead"><b>화면 그림이 들어간 8쪽짜리 안내서</b>입니다. 이것만 따라 하시면 준비가 끝납니다.</p>
+  <a class="btnlink" style="background:#b23a6a" href="설치-따라하기.pdf" download>
+    설치 따라하기.pdf 내려받기</a>
+  <div class="note">
+    받으시면 <b>휴대폰에서도 열립니다.</b> 강의 중에도 이 버튼은 그대로 있습니다.
+  </div>
+</section>
+
 <section class="dl">
   <h2><span class="badge">0</span>먼저 — Claude 데스크탑 앱</h2>
   <p class="lead">실습①에서 씁니다. <b>설치하고 로그인만</b> 하시면 됩니다.
@@ -151,7 +170,7 @@
 </section>
 
 <section>
-  <h2><span class="badge">2</span>얕은기초 지지력 계산기</h2>
+  <h2 id="track-civil"><span class="badge">2</span>얕은기초 지지력 계산기 <span style="font-size:14px;color:var(--sub);font-weight:400">— 토목 트랙</span></h2>
   <p class="where cli">⚠ 여기서부터는 <b>프로그램이 바뀝니다.</b> 앱은 닫지 마시고,
      <b>PowerShell</b>을 새로 열어 아래 한 줄을 붙여넣으세요. 검은 화면에서 합니다.</p>
   <div class="box" id="p0">New-Item -ItemType Directory -Force C:\ai | Out-Null; cd C:\ai; claude</div>
@@ -218,13 +237,18 @@
 - 근입깊이 Df를 1m, 1.5m, 2m
 - 내부마찰각을 25도, 30도, 35도
 - 위 조합을 전부 계산한다 (전반전단, 관입전단 둘 다)
-- 결과를 C:\ai\cases.csv 로 저장한다. 엑셀에서 한글이 깨지지 않게 저장한다
+- 결과를 openpyxl로 엑셀 파일 C:\ai\cases.xlsx 에 저장한다.
+  「전체」 시트에 계산표를 넣고, 근입깊이별로 시트를 따로 만들고,
+  시트마다 기초폭에 따른 허용지지력 그래프를 엑셀 차트로 넣는다
+- 새로 설치하지 말고 이미 깔린 것만 쓴다. openpyxl이 없으면 CSV로 저장하고,
+  엑셀에서 한글이 깨지지 않게 저장한다
 
 다 되면 엑셀로 열어줘.
 그리고 C:\ai 폴더에 지금 어떤 파일들이 있는지도 보여줘.</div>
   <button class="copy" data-copy-from="p4">프롬프트 복사하기</button>
   <div class="note">
-    <b>엑셀이 저절로 열리고 계산표가 가득 차 있습니다.</b> 162줄입니다.<br>
+    <b>엑셀이 저절로 열리고 계산표가 가득 차 있습니다.</b> 162줄이고, 시트가 나뉘어 있고 그래프도 들어 있습니다.<br>
+    <b>「openpyxl이 없다」</b>는 말이 나오면 PowerShell 새 창에 <code>python -m pip install openpyxl</code> 한 줄이면 됩니다.<br>
     이 파일들은 <b>진짜로 내 컴퓨터에 있습니다.</b>
     <b>탐색기로 <code>C:\ai</code> 폴더를 열어보세요.</b> 내일 회사에서 그대로 쓰실 수 있습니다.
   </div>
@@ -238,12 +262,110 @@
   </div>
 </section>
 
+<section style="border-color:#bcd9bf">
+  <h2 id="track-admin"><span class="badge" style="background:#1f7a52">2</span>출장 여비 정산
+    <span style="font-size:14px;color:var(--sub);font-weight:400">— 행정 트랙</span></h2>
+
+  <p class="lead">토목 트랙 대신 <b>이것을 하시면 됩니다.</b> 단계와 시간은 앞 화면과 똑같습니다.</p>
+  <p class="where cli">검은 화면(<b>PowerShell</b>)에서 <b>Claude Code</b>로 합니다.
+     규정 값은 프롬프트 안에 다 들어 있으니 <b>그대로 복사</b>하시면 됩니다.</p>
+
+  <div class="sub-h">먼저 — 폴더를 만들고 그 안에서 켭니다</div>
+  <div class="box" id="a0">New-Item -ItemType Directory -Force C:\ai | Out-Null; cd C:\ai; claude</div>
+  <button class="copy" data-copy-from="a0">프롬프트 복사하기</button>
+  <div class="note">
+    <b>「이 폴더를 믿느냐」</b>고 물으면 <b>↓ 를 눌러 「Yes, I trust this folder」</b> 를 고르고 Enter.
+    그냥 Enter를 치면 꺼집니다.
+  </div>
+
+  <div class="sub-h">첫째 — 여비를 계산하고, 틀리면 스스로 고칩니다</div>
+  <div class="box" id="a1">C:\ai 폴더에 파이썬 파일을 만들어 국내 출장 여비를 계산해줘.
+
+- 일비 20,000원/일, 식비 25,000원/일
+- 숙박비는 실비로 주되 1박 상한이 서울 100,000원, 광역시 80,000원, 그 밖 70,000원
+- 일수는 출발일부터 도착일까지로 세고, 숙박은 (일수 - 1)박으로 본다
+- 이번 건: 출발 2026-09-07 09:00, 도착 2026-09-09 17:00, 지역은 서울,
+  숙박 영수증 1박 120,000원, 교통비 왕복 58,400원
+- 항목별 금액과 합계를 표로 보여주고, 상한을 넘어 깎인 금액을 따로 표시한다
+- 따로 설치가 필요한 라이브러리는 쓰지 않는다
+
+파일을 만든 뒤 직접 실행해서 결과를 보여주고, 오류가 나면 스스로 고쳐서 다시 실행해줘.</div>
+  <button class="copy" data-copy-from="a1">프롬프트 복사하기</button>
+  <div class="note">
+    <b>빨간 글씨가 나와도 그냥 두고 보세요.</b> AI가 스스로 고쳐서 다시 돌립니다.
+    <b>그 장면이 오늘 첫 번째 볼거리입니다.</b>
+  </div>
+
+  <div class="sub-h">둘째 — 화면에서 숫자를 바꿔가며 보는 계산기로</div>
+  <div class="box" id="a2">방금 계산한 내용을 웹 화면으로 만들어줘.
+
+- C:\ai 폴더에 travel.html 파일로 저장한다
+- 출발일시, 도착일시, 지역, 숙박 영수증 금액, 교통비를 입력칸으로 두고
+  값을 바꾸면 결과가 즉시 다시 계산되게 한다
+- 일비, 식비, 숙박비, 교통비를 막대그래프로 보여주고
+  상한에 걸린 항목은 빨간색으로 표시한다
+- 「규정 A(출발일과 도착일을 반일로 본다)」와 「규정 B(둘 다 하루로 본다)」를
+  단추로 바꿀 수 있게 하고, 바꾸면 금액이 바로 바뀌게 한다
+- 인터넷에서 아무것도 받아오지 말고 파일 하나로 동작하게 한다
+
+다 되면 브라우저로 바로 열어줘.
+그리고 C:\ai 폴더에 지금 어떤 파일들이 있는지도 보여줘.</div>
+  <button class="copy" data-copy-from="a2">프롬프트 복사하기</button>
+  <div class="note">
+    브라우저가 저절로 열립니다. <b>입력칸의 숫자를 바꿔 보세요. 금액도 그래프도 바로 따라 바뀝니다.</b>
+  </div>
+
+  <div class="sub-h">셋째 — 180건을 한꺼번에, 엑셀로</div>
+  <p class="lead"><b>여기가 검은 화면을 켠 이유입니다.</b> 채팅으로는 안 되는 일이에요.
+     손으로 하면 며칠 걸릴 것을 몇 초에 끝내고 <b>엑셀 파일로 내 컴퓨터에 남깁니다.</b></p>
+  <div class="box" id="a3">이번엔 여러 건을 한꺼번에 처리해줘.
+
+- 가상의 직원 40명이 최근 3개월간 다녀온 출장 180건을 만든다
+  (이름, 부서, 출발일시, 도착일시, 지역, 숙박 영수증 금액, 교통비)
+- 위 규정대로 180건의 여비를 전부 계산한다
+- 결과를 openpyxl로 엑셀 파일 C:\ai\travel.xlsx 에 저장한다.
+  「상세」 시트에 건별 계산표, 「부서별」과 「월별」 시트에 합계와 건수를 넣고,
+  합계 행은 굵게, 열 너비는 글자에 맞춘다.
+  「부서별」 시트에는 부서별 합계 막대그래프를 엑셀 차트로 넣는다
+- 새로 설치하지 말고 이미 깔린 것만 쓴다. openpyxl이 없으면 CSV로 저장하고,
+  엑셀에서 한글이 깨지지 않게 저장한다
+
+다 되면 엑셀로 열어줘.</div>
+  <button class="copy" data-copy-from="a3">프롬프트 복사하기</button>
+  <div class="note">
+    <b>엑셀이 저절로 열리고 표가 가득 차 있습니다.</b> 180줄이고 시트가 나뉘어 있습니다.<br>
+    <b>「openpyxl이 없다」</b>는 말이 나오면 PowerShell 새 창에
+    <code>python -m pip install openpyxl</code> 한 줄이면 됩니다.<br>
+    이 파일은 <b>진짜로 내 컴퓨터에 있습니다.</b> 탐색기로 <code>C:\ai</code> 를 열어보세요.
+  </div>
+
+  <div class="sub-h">넷째 — 규정 한 줄을 바꾸고, 옆자리와 총액을 맞대어 보세요</div>
+  <p class="lead"><b>자리마다 받으신 A 또는 B 중 하나만</b> 시키세요.</p>
+  <div class="box" id="a4">규정을 바꿔서 다시 계산해줘 — 출발일과 도착일은 반일로 보고 식비를 절반만 준다.</div>
+  <button class="copy small" data-copy-from="a4">A 자리 복사</button>
+  <div class="box" id="a5" style="margin-top:10px">규정을 바꿔서 다시 계산해줘 — 출발일과 도착일도 하루로 보고 식비를 전액 준다.</div>
+  <button class="copy small" data-copy-from="a5">B 자리 복사</button>
+  <div class="note">
+    <b>옆자리와 총액이 다를 겁니다.</b> 규정에 안 적힌 부분은 AI가 알아서 정하기 때문입니다.
+    <b>그 숫자가 그대로 회계 서류에 들어간다면?</b> 왜 그런지가 오늘의 결론입니다.
+  </div>
+
+  <div class="sub-h">끝나고 시간이 남으면</div>
+  <div class="box" id="a6">C:\ai\travel.xlsx 를 읽어서, 부서별 합계가 가장 큰 3개 부서와 그 사유를 정리해줘</div>
+  <button class="copy small" data-copy-from="a6">복사</button>
+  <div class="note">
+    회사에서 쓰시는 표 하나를 <code>C:\ai</code> 에 넣고 <b>"이 표가 무슨 표인지 설명하고,
+    항목별 합계와 평균을 낸 새 엑셀을 만들어줘"</b> 라고 시켜 보셔도 됩니다.<br>
+    둘째 단계의 웹 화면은 브라우저에서 <b>Ctrl+P → PDF로 저장</b>하면 그대로 보고서가 됩니다.
+  </div>
+</section>
+
 <section>
   <h2><span class="badge">+</span>실습② 하고 시간이 남으면</h2>
   <p class="lead">먼저 끝나신 분은 이어서 시켜 보세요. 그냥 한국말로 더 주문하시면 됩니다.</p>
 
   <div class="sub-h">방금 만든 엑셀을 다시 읽혀보기</div>
-  <div class="box" id="x1">C:\ai\cases.csv 를 읽어서, 허용지지력이 300 kPa 이상 나오는 조합 중에 기초폭이 가장 작은 것을 찾아줘</div>
+  <div class="box" id="x1">C:\ai\cases.xlsx 를 읽어서, 허용지지력이 300 kPa 이상 나오는 조합 중에 기초폭이 가장 작은 것을 찾아줘</div>
   <button class="copy small" data-copy-from="x1">복사</button>
 
   <div class="sub-h">지하수위를 넣어 보기</div>
@@ -311,7 +433,8 @@
   });
 
   // ── 참석자 명단 ──────────────────────────────────────────────
-  var BASE = ['박병수','엄재경','정길수','이희광','최규대','최장식','김현주','이병곤'];
+  var BASE = ['박병수','엄재경','정길수','이희광','최규대','최장식','김현주','이병곤','전상현',
+              '서동운','전광식','김지연','김용휘','정유선','김민주','김소연'];
   var KEY  = 'aiclass.names';
 
   function load(){
