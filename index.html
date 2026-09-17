@@ -99,6 +99,17 @@
   <div class="note">
     받으시면 <b>휴대폰에서도 열립니다.</b> 강의 중에도 이 버튼은 그대로 있습니다.
   </div>
+
+  <div class="sub-h">⚠ 파이썬 설치 명령은 PDF 말고 여기서 복사하세요</div>
+  <div class="box" id="py1">$u="https://www.python.org/ftp/python/3.14.7/python-3.14.7-amd64.exe";
+$f="$env:TEMP\python-setup.exe";
+curl.exe -fL --progress-bar -o $f $u; if($?){ Start-Process $f }</div>
+  <button class="copy" data-copy-from="py1">파이썬 설치 명령 복사하기</button>
+  <div class="note">
+    <b>PDF 5쪽의 명령을 복사하면 주소의 하이픈(-)이 빠져</b> 「파일이 손상되었다」는 오류가 납니다.
+    PDF는 <b>화면 그림을 보는 용도</b>로 쓰시고, <b>명령은 이 버튼으로 복사</b>해 주세요.<br>
+    세 줄을 한꺼번에 붙여넣고 Enter. 설치 창이 뜨면 <b>「Add python.exe to PATH」를 반드시 체크</b>하세요.
+  </div>
 </section>
 
 <section class="dl">
